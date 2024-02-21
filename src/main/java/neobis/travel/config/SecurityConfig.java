@@ -38,7 +38,7 @@ public class SecurityConfig {
                     corsConfig.addAllowedHeader("*");
                     corsConfig.addAllowedMethod("*");
                     corsConfig.addAllowedOrigin("*");
-                    corsConfig.addAllowedOrigin("https://neotravel-production-c5db.up.railway.app");
+                    corsConfig.addAllowedOrigin("https://neotravel-production-c5db.up.railway.app/");
                     return corsConfig;
                 }))
                 .authorizeHttpRequests((authorizeHttpRequests) ->
@@ -46,6 +46,7 @@ public class SecurityConfig {
                                 .requestMatchers(
                                         "/",
                                         "/api/**",
+                                        "https://neotravel-production-c5db.up.railway.app/",
                                         "/swagger-ui/**",
                                         "/v3/api-docs/**")
                                 .permitAll()
