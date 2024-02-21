@@ -37,7 +37,7 @@ public class SecurityConfig {
                     corsConfig.addAllowedHeader("*");
                     corsConfig.addAllowedMethod("*");
                     corsConfig.addAllowedOrigin("*");
-                    corsConfig.addAllowedOrigin("https://neotravel-production.up.railway.app");
+                    corsConfig.addAllowedOrigin("https://neotravel-production-c5db.up.railway.app");
                     return corsConfig;
                 }))
                 .authorizeHttpRequests((authorizeHttpRequests) ->
