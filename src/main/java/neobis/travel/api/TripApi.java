@@ -2,6 +2,7 @@ package neobis.travel.api;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.annotation.security.PermitAll;
 import lombok.RequiredArgsConstructor;
 import neobis.travel.dto.*;
 import neobis.travel.enums.Continent;
@@ -17,6 +18,7 @@ import java.util.List;
 @RequestMapping("/api/trips")
 @Tag(name = "Trip Api")
 @CrossOrigin(origins = "*", maxAge = 3600)
+@PermitAll
 public class TripApi {
 
     private final TripService tripService;
