@@ -46,7 +46,7 @@ public class SecurityConfig {
                                 .requestMatchers(
                                         "/",
                                         "/api/**",
-                                        "https://neotravel-production-c5db.up.railway.app/",
+                                        "/https://neotravel-production-c5db.up.railway.app",
                                         "/swagger-ui/**",
                                         "/v3/api-docs/**")
                                 .permitAll()
