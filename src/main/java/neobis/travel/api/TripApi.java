@@ -22,7 +22,7 @@ public class TripApi {
     private final TripService tripService;
     private final CommentService commentService;
 
-    @PostMapping
+    @PostMapping("/saveTrip")
     @Operation(summary = "Save trip", description = "You can save new trip")
     SimpleResponse saveTrip(@RequestBody TripRequest tripRequest) {
         return tripService.saveTrip(tripRequest);
