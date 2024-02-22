@@ -21,13 +21,12 @@ public class UserApi {
 
     private final UserService userService;
 
-    @CrossOrigin(origins = "*", maxAge = 3600)
     @PostMapping("/signIn")
     @Operation(summary = "Вход в свой аккаунт")
     public AuthenticationSignInResponse signIn(@RequestBody SignInRequest signInRequest) {
         return userService.signIn(signInRequest);
     }
-    @CrossOrigin(origins = "*", maxAge = 3600)
+
     @PostMapping("/signUp")
     @Operation(summary = "Зарегистрироваться", description = "Регистрация  аккаунта")
     public AuthenticationSignUpResponse signUp(@RequestBody SignUpRequest signUpRequest) {
