@@ -40,6 +40,7 @@ public class SecurityConfig {
                     corsConfig.addAllowedHeader("*");
                     corsConfig.addAllowedMethod("*");
                     corsConfig.addAllowedOrigin("https://neotravel-production-c5db.up.railway.app");
+                    corsConfig.addAllowedOrigin("https://localhost:3000");
 
 
                     return corsConfig;
@@ -53,7 +54,7 @@ public class SecurityConfig {
                                         "/v3/api-docs/**")
                                 .permitAll()
                                 .anyRequest()
-                                .authenticated())
+                                .permitAll())
                 .sessionManagement((sessionManagement) ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
