@@ -5,12 +5,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.security.PermitAll;
 import lombok.RequiredArgsConstructor;
 import neobis.travel.dto.*;
-import neobis.travel.enums.Continent;
 import neobis.travel.servises.CommentService;
 import neobis.travel.servises.TripService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -26,8 +24,8 @@ public class TripApi {
 
     @PostMapping
     @Operation(summary = "Save trip", description = "You can save new trip")
-    SimpleResponse saveTrip(@RequestBody TripRequest tripRequest, Continent continent) {
-        return tripService.saveTrip(tripRequest, continent);
+    SimpleResponse saveTrip(@RequestBody TripRequest tripRequest) {
+        return tripService.saveTrip(tripRequest);
     }
 
     @PutMapping("/{tripId}")
@@ -56,7 +54,7 @@ public class TripApi {
 
     @GetMapping("/getByContinent")
     @Operation(summary = "Get trip by continent", description = "You can get trip by continent")
-    List<TripResponse> getTripByContinent(Continent continent) {
+    List<TripResponse> getTripByContinent(String continent) {
         return tripService.getByContinent(continent);
     }
 
@@ -76,9 +74,8 @@ public class TripApi {
     @PostMapping("/{tripId}")
     @Operation(summary = "Бронирование тур", description = "Вы можете забронировать тур")
     public SimpleResponse bookingTrip(@PathVariable Long tripId,
-                                      @RequestParam(name = "reserveAnonymous", defaultValue = "false") boolean reserveAnonymous,
                                       @RequestBody BookingRequest bookingRequest) {
-        return tripService.bookingTrip(tripId, reserveAnonymous, bookingRequest);
+        return tripService.bookingTrip(tripId, bookingRequest);
     }
 
     @PostMapping("/commentToTrip/{tripId}")

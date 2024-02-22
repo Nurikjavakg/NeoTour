@@ -3,7 +3,6 @@ package neobis.travel.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import neobis.travel.enums.Continent;
 
 import java.util.List;
 
@@ -16,7 +15,7 @@ public class TripResponse {
     private String tripImage;;
     private String description;
     private String place;
-    private Continent continent;
+    private boolean continent;
     private boolean popular;
     private boolean mostVisited;
     private List<CommentResponse> commentResponse;

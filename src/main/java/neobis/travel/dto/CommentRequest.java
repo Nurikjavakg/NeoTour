@@ -10,4 +10,6 @@ import lombok.*;
 @NoArgsConstructor
 public class CommentRequest{
     private String commentText;
+    private boolean anonymously;
+
 }

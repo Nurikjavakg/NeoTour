@@ -18,6 +18,7 @@ public class Comment {
     @Column(name = "id", nullable = false)
     private Long id;
     private String comment;
+    private boolean anonymously;
     @ManyToOne
     private User user;
     @ManyToOne

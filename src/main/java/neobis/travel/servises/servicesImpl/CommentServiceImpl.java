@@ -48,6 +48,7 @@ public class CommentServiceImpl implements CommentService {
         comment.setTrips(trip);
         trip.getComments().add(comment);
         comment.setUser(user);
+        comment.setAnonymously(commentRequest.isAnonymously());
         commentRepository.save(comment);
         return SimpleResponse.builder()
                 .httpStatus(HttpStatus.OK)

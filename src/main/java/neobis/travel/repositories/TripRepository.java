@@ -2,7 +2,6 @@ package neobis.travel.repositories;
 
 import neobis.travel.dto.TripResponse;
 import neobis.travel.entity.Trip;
-import neobis.travel.enums.Continent;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -17,7 +16,7 @@ public interface TripRepository extends JpaRepository<Trip, Long> {
     @Query("select new neobis.travel.dto.TripResponse(t.tripId, t.name, t.tripImage) from Trip t where t.mostVisited = true")
     List<TripResponse> getTripByMostVisit();
     @Query("select new neobis.travel.dto.TripResponse(t.tripId, t.name, t.tripImage) from Trip t where t.continent = ?1")
-    List<TripResponse> getTripByContinent(Continent continent);
+    List<TripResponse> getTripByContinent(String continent);
     Optional<Trip> getTripByTripId(Long tripId);
     @Query("select new neobis.travel.dto.TripResponse(t.tripId, t.name, t.tripImage) from Trip t where t.featured = true")
     List<TripResponse> getTripByFeatured();

@@ -14,15 +14,17 @@ public class TripRequest {
     private String tripImage;
     private String description;
     private String place;
+    private String continent;;
     private boolean popular;
     private boolean mostVisited;
     private boolean featured;
 
-    public TripRequest(String name, String tripImage, String description, String place, boolean popular, boolean mostVisited, boolean featured) {
+    public TripRequest(String name, String tripImage, String description, String place,String continent, boolean popular, boolean mostVisited, boolean featured) {
         this.name = name;
         this.tripImage = tripImage;
         this.description = description;
         this.place = place;
+        this.continent = continent;
         this.popular = popular;
         this.mostVisited = mostVisited;
         this.featured = featured;

@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import neobis.travel.enums.BookingStatus;
-import neobis.travel.enums.Continent;
 
 import java.util.List;
 
@@ -26,8 +25,7 @@ public class Trip {
     private String tripImage;
     private String description;
     private String place;
-    @Enumerated(EnumType.STRING)
-    private Continent continent;
+    private String continent;
     private boolean popular;
     private boolean mostVisited;
     private boolean featured;

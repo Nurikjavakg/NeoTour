@@ -1,19 +1,18 @@
 package neobis.travel.servises;
 
 import neobis.travel.dto.*;
-import neobis.travel.enums.Continent;
 
 import java.util.List;
 
 public interface TripService {
-    SimpleResponse saveTrip(TripRequest tripRequest, Continent continent);
+    SimpleResponse saveTrip(TripRequest tripRequest);
     SimpleResponse featured(Long tripId);
     SimpleResponse recommended(Long tripId);
     List<TripResponse> getByPopular();
     List<TripResponse> getByMostVisit();
-    List<TripResponse> getByContinent(Continent continent);
+    List<TripResponse> getByContinent(String continent);
     List<TripResponse> getTripByFeatured();
     List<TripResponse> getTripByRecommended();
-    SimpleResponse bookingTrip(Long tripId, boolean reserveAnonymous, BookingRequest bookingRequest);
+    SimpleResponse bookingTrip(Long tripId, BookingRequest bookingRequest);
     TripResponse getCommentUser(Long tripId);
 }

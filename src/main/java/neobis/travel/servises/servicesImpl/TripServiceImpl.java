@@ -7,7 +7,6 @@ import neobis.travel.dto.*;
 import neobis.travel.entity.Trip;
 import neobis.travel.entity.User;
 import neobis.travel.enums.BookingStatus;
-import neobis.travel.enums.Continent;
 import neobis.travel.exceptions.NotFoundException;
 import neobis.travel.repositories.TripRepository;
 import neobis.travel.repositories.UserRepository;
@@ -42,13 +41,13 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
-    public SimpleResponse saveTrip(TripRequest tripRequest,Continent continent) {
+    public SimpleResponse saveTrip(TripRequest tripRequest) {
         Trip trip = new Trip();
         trip.setName(tripRequest.getName());
         trip.setTripImage(tripRequest.getTripImage());
         trip.setDescription(tripRequest.getDescription());
         trip.setPlace(tripRequest.getPlace());
-        trip.setContinent(continent);
+        trip.setContinent(tripRequest.getContinent());
         trip.setPopular(tripRequest.isPopular());
         trip.setMostVisited(tripRequest.isMostVisited());
         tripRepository.save(trip);
@@ -97,7 +96,7 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
-    public List<TripResponse> getByContinent(Continent continent) {
+    public List<TripResponse> getByContinent(String continent) {
         return tripRepository.getTripByContinent(continent);
     }
 
@@ -112,23 +111,16 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
-    public SimpleResponse bookingTrip(Long tripId, boolean reserveAnonymous, BookingRequest bookingRequest) {
+    public SimpleResponse bookingTrip(Long tripId, BookingRequest bookingRequest) {
         User user = getAuthFromUser();
         Trip trip = tripRepository.getTripByTripId(tripId).
                 orElseThrow(()-> new NotFoundException("Trip with Id:"+tripId+" not found!"));
-        if(reserveAnonymous){
-            trip.setReservoir(user);
-            trip.setWishesToTrip(bookingRequest.getWishesToTrip());
-            user.setPhoneNumber(bookingRequest.getPhoneNumber());
-            user.setUserSum(bookingRequest.getUserSum());
-            trip.setBookingStatus(BookingStatus.RESERVED_ANONYMOUSLY);
-        }else {
+
             trip.setReservoir(user);
             trip.setWishesToTrip(bookingRequest.getWishesToTrip());
             user.setPhoneNumber(bookingRequest.getPhoneNumber());
             user.setUserSum(bookingRequest.getUserSum());
             trip.setBookingStatus(BookingStatus.RESERVED);
-        }
         return SimpleResponse.builder()
                 .httpStatus(HttpStatus.OK)
                 .message("Тур успешно забронировано")
