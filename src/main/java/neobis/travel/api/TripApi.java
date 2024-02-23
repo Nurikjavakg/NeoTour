@@ -52,10 +52,16 @@ public class TripApi {
         return tripService.getByMostVisit();
     }
 
-    @GetMapping("/getByContinent")
-    @Operation(summary = "Get trip by continent", description = "You can get trip by continent")
-    List<TripResponse> getTripByContinent(String continent) {
-        return tripService.getByContinent(continent);
+    @GetMapping("/getAsiaTrips")
+    @Operation(summary = "Get trips from Asia", description = "You can get trips from Asia")
+    List<TripResponse> getAsiaTrips() {
+        return tripService.getAsiaTrips();
+    }
+
+    @GetMapping("/getEuropeTrips")
+    @Operation(summary = "Get trips from Europe", description = "You can get trips from Europe")
+    List<TripResponse> getEuropeTrips() {
+        return tripService.getEuropeTrips();
     }
 
     @GetMapping("/getByFeatured")

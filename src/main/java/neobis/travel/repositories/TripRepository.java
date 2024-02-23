@@ -15,8 +15,10 @@ public interface TripRepository extends JpaRepository<Trip, Long> {
     List<TripResponse> getTripByPopular();
     @Query("select new neobis.travel.dto.TripResponse(t.tripId, t.name, t.tripImage) from Trip t where t.mostVisited = true")
     List<TripResponse> getTripByMostVisit();
-    @Query("select new neobis.travel.dto.TripResponse(t.tripId, t.name, t.tripImage) from Trip t where t.continent = ?1")
-    List<TripResponse> getTripByContinent(String continent);
+    @Query("select new neobis.travel.dto.TripResponse(t.tripId, t.name, t.tripImage) from Trip t where t.continent = 'Asia'")
+    List<TripResponse> getAsiaTrips();
+    @Query("select new neobis.travel.dto.TripResponse(t.tripId, t.name, t.tripImage) from Trip t where t.continent = 'Europe'")
+    List<TripResponse> getEuropeTrips();
     Optional<Trip> getTripByTripId(Long tripId);
     @Query("select new neobis.travel.dto.TripResponse(t.tripId, t.name, t.tripImage) from Trip t where t.featured = true")
     List<TripResponse> getTripByFeatured();

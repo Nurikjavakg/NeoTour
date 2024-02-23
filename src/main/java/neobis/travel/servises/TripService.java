@@ -10,7 +10,8 @@ public interface TripService {
     SimpleResponse recommended(Long tripId);
     List<TripResponse> getByPopular();
     List<TripResponse> getByMostVisit();
-    List<TripResponse> getByContinent(String continent);
+    List<TripResponse> getAsiaTrips();
+    List<TripResponse> getEuropeTrips();
     List<TripResponse> getTripByFeatured();
     List<TripResponse> getTripByRecommended();
     SimpleResponse bookingTrip(Long tripId, BookingRequest bookingRequest);

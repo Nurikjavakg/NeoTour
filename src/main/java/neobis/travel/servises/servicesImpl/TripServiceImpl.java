@@ -96,8 +96,13 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
-    public List<TripResponse> getByContinent(String continent) {
-        return tripRepository.getTripByContinent(continent);
+    public List<TripResponse> getAsiaTrips() {
+        return tripRepository.getAsiaTrips();
+    }
+
+    @Override
+    public List<TripResponse> getEuropeTrips() {
+        return tripRepository.getEuropeTrips();
     }
 
     @Override
