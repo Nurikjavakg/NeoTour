@@ -13,7 +13,7 @@ public interface TripService {
     List<TripResponse> getAsiaTrips();
     List<TripResponse> getEuropeTrips();
     List<TripResponse> getTripByFeatured();
-    List<TripResponse> getTripByRecommended();
+    PaginationResponse getTripByRecommended(int currentPage, int pageSize);
     SimpleResponse bookingTrip(Long tripId, BookingRequest bookingRequest);
-    TripResponse getCommentUser(Long tripId);
+    TripResponse getTripById(Long tripId);
 }

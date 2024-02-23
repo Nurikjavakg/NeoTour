@@ -11,6 +11,9 @@ import neobis.travel.exceptions.NotFoundException;
 import neobis.travel.repositories.TripRepository;
 import neobis.travel.repositories.UserRepository;
 import neobis.travel.servises.TripService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -111,8 +114,13 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
-    public List<TripResponse> getTripByRecommended() {
-        return tripRepository.getTripByRecommended();
+    public PaginationResponse getTripByRecommended(int currentPage, int pageSize) {
+        Pageable pageable = PageRequest.of(currentPage-1,pageSize);
+        Page<TripResponse> trips = tripRepository.getTripByRecommended(pageable);
+        return PaginationResponse.builder()
+                .tripResponseList(trips.getContent())
+                .currentPage(trips.getNumber()+1)
+                .pageSize(trips.getTotalPages()).build();
     }
 
     @Override
@@ -133,7 +141,7 @@ public class TripServiceImpl implements TripService {
     }
 
    @Override
-    public TripResponse getCommentUser(Long tripId) {
+    public TripResponse getTripById(Long tripId) {
        TripResponse tripResponse = tripRepository.getTripByIdComments(tripId)
                .orElseThrow(() -> new NotFoundException("Not found"));
 

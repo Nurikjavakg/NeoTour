@@ -40,7 +40,7 @@ public class TripApi {
         return tripService.recommended(tripId);
     }
 
-    @GetMapping
+    @GetMapping("/getByPopular")
     @Operation(summary = "Get populars trip", description = "You can get populars trip")
     List<TripResponse> getTripByPopular() {
         return tripService.getByPopular();
@@ -72,8 +72,9 @@ public class TripApi {
 
     @GetMapping("/getByRecommended")
     @Operation(summary = "Get trip by recommended", description = "You can get trip by recommended")
-    List<TripResponse> getTripByRecommend() {
-        return tripService.getTripByRecommended();
+    PaginationResponse getTripByRecommend(@RequestParam int currentPage,
+                                          @RequestParam int pageSize) {
+        return tripService.getTripByRecommended(currentPage,pageSize);
     }
 
     @PreAuthorize("hasAuthority('USER')")
@@ -85,14 +86,14 @@ public class TripApi {
     }
 
     @PostMapping("/commentToTrip/{tripId}")
-    @Operation(summary = "Comment trip", description = "You can save new trip")
+    @Operation(summary = "Comment trip", description = "You can comment to trip")
     SimpleResponse commentToTrip(@PathVariable Long tripId, @RequestBody CommentRequest commentRequest) {
         return commentService.commentToTrip(tripId,commentRequest);
     }
 
-    @GetMapping("/getTripWithComments/{tripId}")
-    @Operation(summary = "Get trips comments", description = "You can get most visits trip")
-    public TripResponse getCommentUser(@PathVariable Long tripId) {
-        return tripService.getCommentUser(tripId);
+    @GetMapping("/getTripById/{tripId}")
+    @Operation(summary = "Get trip by id", description = "You can get trip by id")
+    public TripResponse getTripById(@PathVariable Long tripId) {
+        return tripService.getTripById(tripId);
     }
 }

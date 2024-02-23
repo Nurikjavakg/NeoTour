@@ -2,6 +2,8 @@ package neobis.travel.repositories;
 
 import neobis.travel.dto.TripResponse;
 import neobis.travel.entity.Trip;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -23,7 +25,7 @@ public interface TripRepository extends JpaRepository<Trip, Long> {
     @Query("select new neobis.travel.dto.TripResponse(t.tripId, t.name, t.tripImage) from Trip t where t.featured = true")
     List<TripResponse> getTripByFeatured();
     @Query("select new neobis.travel.dto.TripResponse(t.tripId, t.name, t.tripImage) from Trip t where t.recommended = true")
-    List<TripResponse> getTripByRecommended();
+    Page<TripResponse> getTripByRecommended(Pageable pageable);
     @Query("select new neobis.travel.dto.TripResponse(t.tripId, t.name, t.tripImage, t.description, t.place) from Trip t where t.tripId = ?1")
     Optional<TripResponse> getTripByIdComments(Long tripId);
 }
