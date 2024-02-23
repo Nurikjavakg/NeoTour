@@ -94,7 +94,7 @@ public class TripApi {
     }
 
     @PreAuthorize("hasAuthority('USER')")
-    @PostMapping("/{tripId}")
+    @PostMapping("/unBooking/{tripId}")
     @Operation(summary = "Разбронирование тур", description = "Вы можете разбронировать тур")
     public SimpleResponse unBookingTrip(@PathVariable Long tripId) {
         return tripService.unBookingTrip(tripId);
