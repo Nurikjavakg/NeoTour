@@ -163,6 +163,10 @@ public class TripServiceImpl implements TripService {
         if (trip.getReservoir().equals(user)) {
             if (trip.getBookingStatus().equals(BookingStatus.RESERVED)) {
                 trip.setReservoir(null);
+                trip.setBookingStatus(null);
+                trip.setWishesToTrip(null);
+                trip.setDateFrom(null);
+                user.setPhoneNumber(null);
                 tripRepository.save(trip);
                 userRepository.save(user);
             } else {
