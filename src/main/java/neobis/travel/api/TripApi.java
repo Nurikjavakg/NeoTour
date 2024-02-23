@@ -2,7 +2,6 @@ package neobis.travel.api;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.annotation.security.PermitAll;
 import lombok.RequiredArgsConstructor;
 import neobis.travel.dto.*;
 import neobis.travel.servises.CommentService;

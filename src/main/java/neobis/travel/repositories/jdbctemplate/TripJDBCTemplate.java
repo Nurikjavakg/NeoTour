@@ -14,7 +14,7 @@ public class TripJDBCTemplate {
 
     private final JdbcTemplate jdbcTemplate;
 
-    public TripResponse getAllBookingTrips(ResultSet rs, int rowName) throws SQLException {
+    public TripResponse getAllTrips(ResultSet rs, int rowName) throws SQLException {
         return new TripResponse(
                 rs.getLong("tripId"),
                 rs.getString("tripName"),
@@ -23,16 +23,29 @@ public class TripJDBCTemplate {
 
     public List<TripResponse> getBookingTrips(String email) {
         String sql = """
-               
+                               
                 SELECT
                    t.trip_id AS tripId,
                    t.name AS tripName,
                    t.trip_image AS tripImage
-               FROM
+                               FROM
                    users u
                        left join trips t on t.reservoir_user_id= u.user_id
-               where u.email = ?;
+                                where u.email = ?;
                 """;
-        return jdbcTemplate.query(sql, this::getAllBookingTrips, email);
+        return jdbcTemplate.query(sql, this::getAllTrips, email);
     }
+
+    public List<TripResponse> getFeaturedTrips(String email) {
+        String sql = """
+                SELECT
+           t.trip_id AS tripId,
+           t.name AS tripName,
+           t.trip_image AS tripImage
+        FROM
+        users u
+        left join trips t on t.featured_user_user_id= u.user_id
+        where u.email = ?""";
+         return jdbcTemplate.query(sql, this::getAllTrips, email);
+     }
 }

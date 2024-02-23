@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import neobis.travel.enums.BookingStatus;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -31,6 +32,8 @@ public class Trip {
     private boolean featured;
     private boolean recommended;
     private String wishesToTrip;
+    private LocalDate dateFrom;
+    private LocalDate dateTo;
     @ManyToOne(cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
             CascadeType.MERGE})

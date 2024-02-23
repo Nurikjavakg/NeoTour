@@ -119,7 +119,8 @@ public class TripServiceImpl implements TripService {
 
     @Override
     public List<TripResponse> getTripByFeatured() {
-        return tripRepository.getTripByFeatured();
+        User user = getAuthFromUser();
+        return tripJDBCTemplate.getFeaturedTrips(user.getEmail());
     }
 
     @Override
@@ -143,6 +144,8 @@ public class TripServiceImpl implements TripService {
             user.setPhoneNumber(bookingRequest.getPhoneNumber());
             user.setUserSum(bookingRequest.getUserSum());
             trip.setBookingStatus(BookingStatus.RESERVED);
+            trip.setDateFrom(bookingRequest.getDateFrom());
+            trip.setDateTo(bookingRequest.getDateTo());
         return SimpleResponse.builder()
                 .httpStatus(HttpStatus.OK)
                 .message("Тур успешно забронировано")
