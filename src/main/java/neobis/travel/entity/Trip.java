@@ -31,6 +31,10 @@ public class Trip {
     private boolean featured;
     private boolean recommended;
     private String wishesToTrip;
+    @ManyToOne(cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE})
+    private User featuredUser;
     @Enumerated(EnumType.STRING)
     private BookingStatus bookingStatus;
     @ManyToOne(cascade = {CascadeType.REFRESH,

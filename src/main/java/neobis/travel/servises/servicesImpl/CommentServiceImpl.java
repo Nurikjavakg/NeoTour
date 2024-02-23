@@ -45,6 +45,7 @@ public class CommentServiceImpl implements CommentService {
         Comment comment = new Comment();
         comment.setComment(commentRequest.getCommentText());
         user.getComment().add(comment);
+        comment.setUserImage(user.getUserImage());
         comment.setTrips(trip);
         trip.getComments().add(comment);
         comment.setUser(user);

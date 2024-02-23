@@ -19,8 +19,13 @@ public class Comment {
     private Long id;
     private String comment;
     private boolean anonymously;
-    @ManyToOne
+    private String userImage;
+    @ManyToOne(cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE})
     private User user;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE})
     private Trip trips;
 }

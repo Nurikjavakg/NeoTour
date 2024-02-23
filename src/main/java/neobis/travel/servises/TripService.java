@@ -1,7 +1,6 @@
 package neobis.travel.servises;
 
 import neobis.travel.dto.*;
-
 import java.util.List;
 
 public interface TripService {
@@ -15,5 +14,7 @@ public interface TripService {
     List<TripResponse> getTripByFeatured();
     PaginationResponse getTripByRecommended(int currentPage, int pageSize);
     SimpleResponse bookingTrip(Long tripId, BookingRequest bookingRequest);
+    SimpleResponse unBookingTrip(Long tripId);
     TripResponse getTripById(Long tripId);
+    List<TripResponse> getBookingTripsFromUser();
 }
