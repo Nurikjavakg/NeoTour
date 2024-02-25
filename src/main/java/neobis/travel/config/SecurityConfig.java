@@ -21,6 +21,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 
+import java.util.Arrays;
+
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -36,7 +38,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(request -> {
                     CorsConfiguration corsConfig = new CorsConfiguration();
                     corsConfig.addAllowedHeader("*");
-                    corsConfig.addAllowedMethod("*");
+                    corsConfig.setAllowedMethods(Arrays.asList("GET", "POST", "PUT"));
                     corsConfig.addAllowedOrigin("*");
                     corsConfig.addAllowedOrigin("https://neotravel-production-c5db.up.railway.app");
                     corsConfig.addAllowedOrigin("https://localhost:3000");
