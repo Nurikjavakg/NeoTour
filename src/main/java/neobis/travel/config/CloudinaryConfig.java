@@ -10,9 +10,9 @@ import java.util.Map;
 public class CloudinaryConfig {
     @Bean
     public Cloudinary cloudinary() {
-        String cloudName = System.getenv("CLOUD_NAME");
-        String apiKey = System.getenv("API_KEY");
-        String apiSecret = System.getenv("API_SECRET");
+        String cloudName = "dpci5s3tm";
+        String apiKey = "357384328671388";
+        String apiSecret = "***************************";
 
         if (cloudName == null || apiKey == null || apiSecret == null) {
             throw new IllegalArgumentException("Cloudinary environment variables not set");
