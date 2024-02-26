@@ -40,7 +40,6 @@ public class SecurityConfig {
                     corsConfig.addAllowedOrigin("*");
                     corsConfig.addAllowedOrigin("https://neotravel-production-c5db.up.railway.app");
                     corsConfig.addAllowedOrigin("https://localhost:3000");
-
                     return corsConfig;
                 }))
                 .authorizeHttpRequests((authorizeHttpRequests) ->
