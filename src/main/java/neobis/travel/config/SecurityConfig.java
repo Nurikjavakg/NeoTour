@@ -35,11 +35,10 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(cors -> cors.configurationSource(request -> {
                     CorsConfiguration corsConfig = new CorsConfiguration();
-                    corsConfig.addAllowedHeader("*");
-                    corsConfig.addAllowedMethod("*");
-                    corsConfig.addAllowedOrigin("*");
                     corsConfig.addAllowedOrigin("https://neotravel-production-c5db.up.railway.app");
                     corsConfig.addAllowedOrigin("https://localhost:3000");
+                    corsConfig.addAllowedHeader("*");
+                    corsConfig.addAllowedMethod("*");
                     return corsConfig;
                 }))
                 .authorizeHttpRequests((authorizeHttpRequests) ->
@@ -50,8 +49,7 @@ public class SecurityConfig {
                                         "/swagger-ui/**",
                                         "/v3/api-docs/**")
                                 .permitAll()
-                                .anyRequest()
-                                .authenticated())
+                                .anyRequest())
                 .sessionManagement((sessionManagement) ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
