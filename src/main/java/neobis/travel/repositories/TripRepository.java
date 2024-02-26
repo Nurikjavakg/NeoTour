@@ -25,4 +25,13 @@ public interface TripRepository extends JpaRepository<Trip, Long> {
     Page<TripResponse> getTripByRecommended(Pageable pageable);
     @Query("select new neobis.travel.dto.TripResponse(t.tripId, t.name, t.tripImage, t.description, t.place) from Trip t where t.tripId = ?1")
     Optional<TripResponse> getTripByIdComments(Long tripId);
+    @Query("select t.tripId, t.name, t.tripImage from Trip t where t.seasons = 'WINTER'")
+    List<Object[]> getTripsFromWinter();
+    @Query("select t.tripId, t.name, t.tripImage from Trip t where t.seasons = 'SUMMER'")
+    List<Object[]> getTripsFromSummer();
+    @Query("select t.tripId, t.name, t.tripImage from Trip t where t.seasons = 'SPRING'")
+    List<Object[]> getTripsFromSpring();
+    @Query("select t.tripId, t.name, t.tripImage from Trip t where t.seasons = 'AUTUMN'")
+    List<Object[]> getTripsFromAutumn();
+
 }

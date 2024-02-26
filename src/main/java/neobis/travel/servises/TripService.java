@@ -19,4 +19,5 @@ public interface TripService {
     SimpleResponse unBookingTrip(Long tripId);
     TripResponse getTripById(Long tripId);
     List<TripResponse> getBookingTripsFromUser();
+    List<TripResponse> getTripsFromSeasons();
 }

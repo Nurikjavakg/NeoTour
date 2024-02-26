@@ -47,4 +47,6 @@ public class TripResponse {
         this.commentResponse = commentResponseList;
     }
 
+    public TripResponse(String name, String description) {
+    }
 }

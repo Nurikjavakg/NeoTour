@@ -120,4 +120,11 @@ public class TripApi {
     public List<TripResponse> getBookingTripsUser() {
         return tripService.getBookingTripsFromUser();
     }
+
+  @PreAuthorize("hasAuthority('USER')")
+  @GetMapping("/getTripsWithSeason")
+  @Operation(summary = "Get booking trips from user")
+  public List<TripResponse> getTripsFromSeason() {
+    return tripService.getTripsFromSeasons();
+  }
 }

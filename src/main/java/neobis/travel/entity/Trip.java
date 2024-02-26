@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import neobis.travel.enums.BookingStatus;
+import neobis.travel.enums.Seasons;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -33,6 +34,8 @@ public class Trip {
     private String wishesToTrip;
     private LocalDate dateFrom;
     private LocalDate dateTo;
+    @Enumerated(EnumType.STRING)
+    private Seasons seasons;
     @ManyToOne(cascade = {CascadeType.REFRESH,
             CascadeType.DETACH,
             CascadeType.MERGE})

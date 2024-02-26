@@ -42,7 +42,8 @@ public class SecurityConfig {
                     return corsConfig;
                 }))
                 .authorizeHttpRequests(auth -> auth
-                      //  .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers( "/api/**", "/swagger-ui/**", "/v3/**").permitAll()
+                        .requestMatchers("/api/trips/**").hasAnyAuthority("USER","ADMIN")
                         .anyRequest().permitAll())
                 .sessionManagement((sessionManagement) ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
