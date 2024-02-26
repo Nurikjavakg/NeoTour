@@ -21,10 +21,10 @@ public class TripApi {
     private final TripService tripService;
     private final CommentService commentService;
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+  //  @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/saveTrip")
     @Operation(summary = "Save trip", description = "You can save new trip")
-    SimpleResponse saveTrip(@RequestPart TripRequest tripRequest,@RequestPart("images") List<MultipartFile> images) {
+    SimpleResponse saveTrip(@RequestPart("file") TripRequest tripRequest,@RequestPart("images") List<MultipartFile> images) {
         return tripService.saveTrip(tripRequest, images);
     }
 

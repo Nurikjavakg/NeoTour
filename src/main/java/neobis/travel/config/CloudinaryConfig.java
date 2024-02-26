@@ -12,7 +12,7 @@ public class CloudinaryConfig {
     public Cloudinary cloudinary() {
         String cloudName = "dpci5s3tm";
         String apiKey = "357384328671388";
-        String apiSecret = "***************************";
+        String apiSecret = "r0bJL2Y4Leu68Hcm31F_mzfbQ9U";
 
         if (cloudName == null || apiKey == null || apiSecret == null) {
             throw new IllegalArgumentException("Cloudinary environment variables not set");

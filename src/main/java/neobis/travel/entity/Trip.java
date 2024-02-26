@@ -15,12 +15,11 @@ import java.util.List;
 public class Trip {
     @Id
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
+            strategy = GenerationType.IDENTITY,
             generator = "trips_gen")
-    @SequenceGenerator(name = "trips_gen",
-            sequenceName = "trips_seq",
-            allocationSize = 1,
-            initialValue = 1)
+//    @SequenceGenerator(name = "trips_gen",
+//            sequenceName = "trips_seq",
+//            allocationSize = 1)
     private Long tripId;
     private String name;
     private String tripImage;
