@@ -4,12 +4,13 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.io.Serializable;
 
 @Builder
 @Getter
 @Setter
 @NoArgsConstructor
-public class TripRequest {
+public class TripRequest implements Serializable {
     private String name;
     private String tripImage;
     private String description;
