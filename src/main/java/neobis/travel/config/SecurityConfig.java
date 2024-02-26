@@ -42,7 +42,12 @@ public class SecurityConfig {
                     return configuration;
                 }))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/**").hasRole("ADMIN")
+                        .requestMatchers(
+                                "/",
+                                "/api/**",
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**")
+                        .hasRole("ADMIN")
                         .anyRequest().permitAll())
 
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
