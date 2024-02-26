@@ -31,27 +31,31 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain SecurityFilterChain(HttpSecurity http) throws Exception {
-        http
+        return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(cors -> cors.configurationSource(request -> {
-                    CorsConfiguration configuration = new CorsConfiguration();
-                    configuration.addAllowedOrigin("https://neotravel-production-c5db.up.railway.app");
-                    configuration.addAllowedOrigin("http://localhost:3000");
-                    configuration.addAllowedHeader("*");
-                    configuration.addAllowedMethod("*");
-                    return configuration;
+                    CorsConfiguration corsConfig = new CorsConfiguration();
+                    corsConfig.addAllowedHeader("*");
+                    corsConfig.addAllowedMethod("*");
+                    corsConfig.addAllowedOrigin("*");
+                    corsConfig.addAllowedOrigin("https://neotravel-production-c5db.up.railway.app");
+                    corsConfig.addAllowedOrigin("https://localhost:3000");
+                    return corsConfig;
                 }))
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(
-                                "/",
-                                "/api/**")
-                        .hasAnyRole("ADMIN", "USER")
-                        .anyRequest().permitAll())
-
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-
-        return http.build();
+                .authorizeHttpRequests((authorizeHttpRequests) ->
+                        authorizeHttpRequests
+                                .requestMatchers(
+                                        "/",
+                                        "/api/**",
+                                        "/swagger-ui/**",
+                                        "/v3/api-docs/**")
+                                .permitAll()
+                                .anyRequest()
+                                .authenticated())
+                .sessionManagement((sessionManagement) ->
+                        sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .build();
     }
 
     @Bean
