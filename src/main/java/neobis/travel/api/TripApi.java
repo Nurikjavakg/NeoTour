@@ -24,7 +24,7 @@ public class TripApi {
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/saveTrip")
     @Operation(summary = "Save trip", description = "You can save new trip")
-    SimpleResponse saveTrip(@RequestBody TripRequest tripRequest,@RequestParam("images") List<MultipartFile> images) {
+    SimpleResponse saveTrip(@RequestPart TripRequest tripRequest,@RequestPart("images") List<MultipartFile> images) {
         return tripService.saveTrip(tripRequest, images);
     }
 
