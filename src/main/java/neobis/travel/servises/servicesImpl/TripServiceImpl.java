@@ -4,11 +4,13 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import neobis.travel.dto.*;
+import neobis.travel.entity.Image;
 import neobis.travel.entity.Trip;
 import neobis.travel.entity.User;
 import neobis.travel.enums.BookingStatus;
 import neobis.travel.exceptions.BadCredentialException;
 import neobis.travel.exceptions.NotFoundException;
+import neobis.travel.repositories.ImageRepository;
 import neobis.travel.repositories.TripRepository;
 import neobis.travel.repositories.UserRepository;
 import neobis.travel.repositories.jdbctemplate.TripJDBCTemplate;
@@ -22,6 +24,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -37,6 +40,8 @@ public class TripServiceImpl implements TripService {
     private final UserRepository userRepository;
     private final JdbcTemplate jdbcTemplate;
     private final TripJDBCTemplate tripJDBCTemplate;
+    private final CloudinaryService cloudinaryService;
+    private final ImageRepository imageRepository;
 
 
     public User getAuthFromUser() {
@@ -50,21 +55,37 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
-    public SimpleResponse saveTrip(TripRequest tripRequest) {
+    public SimpleResponse saveTrip(TripRequest tripRequest, List<MultipartFile>  images) {
         Trip trip = new Trip();
         trip.setName(tripRequest.getName());
-        trip.setTripImage(tripRequest.getTripImage());
         trip.setDescription(tripRequest.getDescription());
         trip.setPlace(tripRequest.getPlace());
         trip.setContinent(tripRequest.getContinent());
         trip.setPopular(tripRequest.isPopular());
         trip.setMostVisited(tripRequest.isMostVisited());
+
+        List<Image> tripImages = new ArrayList<>();
+        iterateOverPhotos(images, tripImages);
+        trip.setImages(tripImages);
         tripRepository.save(trip);
         log.info("Trip is successfully saved");
         return SimpleResponse.builder()
                 .httpStatus(HttpStatus.OK)
                 .message("Trip is successfully saved")
                 .build();
+    }
+
+    private void iterateOverPhotos(List<MultipartFile> images, List<Image> tripImages) {
+        for (MultipartFile image : images) {
+            try {
+                Image tripImage = new Image();
+                tripImage.setUrl(cloudinaryService.uploadFile(image, "vacationTrip"));
+                imageRepository.save(tripImage);
+                tripImages.add(tripImage);
+            } catch (Exception e) {
+                throw new RuntimeException("Image upload failed: " + e.getMessage());
+            }
+        }
     }
 
     @Override

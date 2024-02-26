@@ -46,4 +46,11 @@ public class Trip {
     private User reservoir;
     @OneToMany(mappedBy = "trips", cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH,CascadeType.REMOVE})
     private List<Comment> comments;
+    @OneToMany
+    @JoinTable(
+            name = "trips_images",
+            joinColumns = @JoinColumn(name = "trip_id"),
+            inverseJoinColumns = @JoinColumn(name = "image_id")
+    )
+    private List<Image> images;
 }

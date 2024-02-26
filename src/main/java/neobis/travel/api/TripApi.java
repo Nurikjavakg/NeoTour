@@ -8,6 +8,7 @@ import neobis.travel.servises.CommentService;
 import neobis.travel.servises.TripService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
@@ -23,8 +24,8 @@ public class TripApi {
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/saveTrip")
     @Operation(summary = "Save trip", description = "You can save new trip")
-    SimpleResponse saveTrip(@RequestBody TripRequest tripRequest) {
-        return tripService.saveTrip(tripRequest);
+    SimpleResponse saveTrip(@RequestBody TripRequest tripRequest,@RequestParam("images") List<MultipartFile> images) {
+        return tripService.saveTrip(tripRequest, images);
     }
 
     @PreAuthorize("hasAuthority('USER')")

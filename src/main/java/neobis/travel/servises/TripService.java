@@ -1,10 +1,12 @@
 package neobis.travel.servises;
 
 import neobis.travel.dto.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 public interface TripService {
-    SimpleResponse saveTrip(TripRequest tripRequest);
+    SimpleResponse saveTrip(TripRequest tripRequest, List<MultipartFile>  images);
     SimpleResponse featured(Long tripId);
     SimpleResponse recommended(Long tripId);
     List<TripResponse> getByPopular();
