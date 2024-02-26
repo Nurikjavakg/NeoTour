@@ -55,6 +55,7 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
+    @Transactional
     public SimpleResponse saveTrip(TripRequest tripRequest, List<MultipartFile>  images) {
         Trip trip = new Trip();
         trip.setName(tripRequest.getName());
