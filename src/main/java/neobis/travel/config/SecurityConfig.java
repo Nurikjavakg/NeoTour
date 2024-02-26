@@ -41,15 +41,9 @@ public class SecurityConfig {
                     corsConfig.addAllowedMethod("*");
                     return corsConfig;
                 }))
-                .authorizeHttpRequests((authorizeHttpRequests) ->
-                        authorizeHttpRequests
-                                .requestMatchers(
-                                        "/",
-                                        "/api/**",
-                                        "/swagger-ui/**",
-                                        "/v3/api-docs/**")
-                                .permitAll()
-                                )
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .anyRequest().permitAll())
                 .sessionManagement((sessionManagement) ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
