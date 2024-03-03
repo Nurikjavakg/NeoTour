@@ -22,13 +22,13 @@ public class UserApi {
     private final UserService userService;
 
     @PostMapping("/signIn")
-    @Operation(summary = "Вход в свой аккаунт")
+    @Operation(summary = "Log in to your account")
     public AuthenticationSignInResponse signIn(@RequestBody SignInRequest signInRequest) {
         return userService.signIn(signInRequest);
     }
 
     @PostMapping("/signUp")
-    @Operation(summary = "Зарегистрироваться", description = "Регистрация  аккаунта")
+    @Operation(summary = "Sign up", description = "Account registration")
     public AuthenticationSignUpResponse signUp(@RequestBody SignUpRequest signUpRequest) {
         return userService.signUp(signUpRequest);
     }

@@ -33,5 +33,4 @@ public interface TripRepository extends JpaRepository<Trip, Long> {
     List<Object[]> getTripsFromSpring();
     @Query("select t.tripId, t.name, t.tripImage from Trip t where t.seasons = 'AUTUMN'")
     List<Object[]> getTripsFromAutumn();
-
 }

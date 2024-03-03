@@ -38,14 +38,14 @@ public class TripJDBCTemplate {
 
     public List<TripResponse> getFeaturedTrips(String email) {
         String sql = """
-                SELECT
-           t.trip_id AS tripId,
-           t.name AS tripName,
-           t.trip_image AS tripImage
-        FROM
-        users u
-        left join trips t on t.featured_user_user_id= u.user_id
-        where u.email = ?""";
-         return jdbcTemplate.query(sql, this::getAllTrips, email);
-     }
+                        SELECT
+                   t.trip_id AS tripId,
+                   t.name AS tripName,
+                   t.trip_image AS tripImage
+                FROM
+                users u
+                left join trips t on t.featured_user_user_id= u.user_id
+                where u.email = ?""";
+        return jdbcTemplate.query(sql, this::getAllTrips, email);
+    }
 }

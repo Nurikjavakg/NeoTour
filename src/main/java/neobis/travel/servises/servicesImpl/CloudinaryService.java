@@ -12,19 +12,19 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class CloudinaryService {
 
-        private final Cloudinary cloudinary;
+    private final Cloudinary cloudinary;
 
-        public String uploadFile(MultipartFile file, String folderName) {
-            try{
-                HashMap<Object, Object> options = new HashMap<>();
-                options.put("folder", folderName);
-                Map uploadedFile = cloudinary.uploader().upload(file.getBytes(), options);
-                String publicId = (String) uploadedFile.get("public_id");
-                return cloudinary.url().secure(true).generate(publicId);
+    public String uploadFile(MultipartFile file, String folderName) {
+        try {
+            HashMap<Object, Object> options = new HashMap<>();
+            options.put("folder", folderName);
+            Map uploadedFile = cloudinary.uploader().upload(file.getBytes(), options);
+            String publicId = (String) uploadedFile.get("public_id");
+            return cloudinary.url().secure(true).generate(publicId);
 
-            }catch (IOException e){
-                e.printStackTrace();
-                return null;
-            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
         }
     }
+}

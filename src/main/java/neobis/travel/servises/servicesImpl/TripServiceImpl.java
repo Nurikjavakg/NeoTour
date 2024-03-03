@@ -51,7 +51,7 @@ public class TripServiceImpl implements TripService {
         return userRepository.getUserByEmail(email).orElseThrow(
                 () -> {
                     log.info("User with email: " + email + " not found!");
-                    return new NotFoundException(String.format("Пользователь с адресом электронной почты: %s не найден!", email));
+                    return new NotFoundException(String.format("User with email address: %s not found!", email));
                 });
     }
 
@@ -172,7 +172,7 @@ public class TripServiceImpl implements TripService {
         trip.setDateTo(bookingRequest.getDateTo());
         return SimpleResponse.builder()
                 .httpStatus(HttpStatus.OK)
-                .message("Тур успешно забронировано")
+                .message("The tour has been successfully booked")
                 .build();
     }
 
@@ -182,7 +182,7 @@ public class TripServiceImpl implements TripService {
 
         Trip trip = tripRepository.findById(tripId).orElseThrow(() -> {
             log.info("Trip with id:" + tripId + " not found");
-            return new NotFoundException("Тур с идентификатором: " + tripId + " не найдено");
+            return new NotFoundException("The tour with identifier: " + tripId + " was not found.");
         });
         if (trip.getReservoir().equals(user)) {
             if (trip.getBookingStatus().equals(BookingStatus.RESERVED)) {
@@ -194,15 +194,15 @@ public class TripServiceImpl implements TripService {
                 tripRepository.save(trip);
                 userRepository.save(user);
             } else {
-                log.info("Wish is not reserved");
-                throw new BadCredentialException("Пожелание не находится в забронированном состоянии");
+                log.info("The wish is not in the booked state");
+                throw new BadCredentialException("The tour is not in the booked state");
             }
         } else {
-            throw new BadCredentialException("Вы не можете отменить бронирование пожелание");
+            throw new BadCredentialException("You cannot cancel the booking of the wish");
         }
         return SimpleResponse.builder()
                 .httpStatus(HttpStatus.OK)
-                .message("Тур успешно разбронирована")
+                .message("The tour has been successfully unbooked")
                 .build();
     }
 

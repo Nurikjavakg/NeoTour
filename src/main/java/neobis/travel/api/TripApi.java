@@ -21,10 +21,9 @@ public class TripApi {
     private final TripService tripService;
     private final CommentService commentService;
 
-  //  @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/saveTrip")
     @Operation(summary = "Save trip", description = "You can save new trip")
-    SimpleResponse saveTrip(@RequestPart("file") TripRequest tripRequest,@RequestPart("images") List<MultipartFile> images) {
+    SimpleResponse saveTrip(@RequestPart("file") TripRequest tripRequest, @RequestPart("images") List<MultipartFile> images) {
         return tripService.saveTrip(tripRequest, images);
     }
 
@@ -82,12 +81,12 @@ public class TripApi {
     @Operation(summary = "Get trip by recommended", description = "You can get trip by recommended")
     PaginationResponse getTripByRecommend(@RequestParam int currentPage,
                                           @RequestParam int pageSize) {
-        return tripService.getTripByRecommended(currentPage,pageSize);
+        return tripService.getTripByRecommended(currentPage, pageSize);
     }
 
     @PreAuthorize("hasAuthority('USER')")
     @PostMapping("/{tripId}")
-    @Operation(summary = "Бронирование тур", description = "Вы можете забронировать тур")
+    @Operation(summary = "Booking a tour", description = "You can book the tour")
     public SimpleResponse bookingTrip(@PathVariable Long tripId,
                                       @RequestBody BookingRequest bookingRequest) {
         return tripService.bookingTrip(tripId, bookingRequest);
@@ -95,7 +94,7 @@ public class TripApi {
 
     @PreAuthorize("hasAuthority('USER')")
     @PostMapping("/unBooking/{tripId}")
-    @Operation(summary = "Разбронирование тур", description = "Вы можете разбронировать тур")
+    @Operation(summary = "Cancellation of the Tour Reservation", description = "You can cancel the tour")
     public SimpleResponse unBookingTrip(@PathVariable Long tripId) {
         return tripService.unBookingTrip(tripId);
     }
@@ -104,7 +103,7 @@ public class TripApi {
     @PostMapping("/commentToTrip/{tripId}")
     @Operation(summary = "Comment trip", description = "You can comment to trip")
     SimpleResponse commentToTrip(@PathVariable Long tripId, @RequestBody CommentRequest commentRequest) {
-        return commentService.commentToTrip(tripId,commentRequest);
+        return commentService.commentToTrip(tripId, commentRequest);
     }
 
     @PreAuthorize("hasAuthority('USER')")
@@ -121,10 +120,10 @@ public class TripApi {
         return tripService.getBookingTripsFromUser();
     }
 
-  @PreAuthorize("hasAuthority('USER')")
-  @GetMapping("/getTripsWithSeason")
-  @Operation(summary = "Get booking trips from user")
-  public List<TripResponse> getTripsFromSeason() {
-    return tripService.getTripsFromSeasons();
-  }
+    @PreAuthorize("hasAuthority('USER')")
+    @GetMapping("/getTripsWithSeason")
+    @Operation(summary = "Get booking trips from user")
+    public List<TripResponse> getTripsFromSeason() {
+        return tripService.getTripsFromSeasons();
+    }
 }

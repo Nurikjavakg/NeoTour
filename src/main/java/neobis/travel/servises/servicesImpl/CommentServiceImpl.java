@@ -33,15 +33,16 @@ public class CommentServiceImpl implements CommentService {
         return userRepository.getUserByEmail(email).orElseThrow(
                 () -> {
                     log.info("User with email: " + email + " not found!");
-                    return new NotFoundException(String.format("Пользователь с адресом электронной почты: %s не найден!", email));
+                    return new NotFoundException(String.format("User with email address: %s not found!", email));
                 });
     }
+
     @Override
     public SimpleResponse commentToTrip(Long tripId, CommentRequest commentRequest) {
         User user = getAuthFromUser();
 
         Trip trip = tripRepository.getTripByTripId(tripId).
-                orElseThrow(()-> new NotFoundException("Trip with Id:"+tripId+" not found!"));
+                orElseThrow(() -> new NotFoundException("Trip with Id:" + tripId + " not found!"));
         Comment comment = new Comment();
         comment.setComment(commentRequest.getCommentText());
         user.getComment().add(comment);
