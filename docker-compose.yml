@@ -1,0 +1,27 @@
+services:
+  Travels:
+    image: "nurik345/travel:t1"
+    container_name: travels-ms
+    ports:
+      - 8181:5432
+
+    environment:
+      SPRING_APPLICATION_NAME: "travels"
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://travelsdb:5432/travelsdb"
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 1234
+
+    deploy:
+       resources:
+        limits:
+           memory: 700m
+
+  travelsdb:
+    image: postgres:latest
+    container_name: travelsdb
+    ports:
+     - "5438:5432"
+    environment:
+      POSTGRES_DB: travelsdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234

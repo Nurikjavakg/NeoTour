@@ -11,6 +11,7 @@
     <groupId>com.example</groupId>
     <artifactId>Travel</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
     <name>Travel</name>
     <description>Travel</description>
     <properties>
@@ -104,6 +105,12 @@
             <artifactId>cloudinary-http44</artifactId>
             <version>1.26.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>5.0.1</version> <!-- Убедитесь, что версия актуальна -->
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>
