@@ -82,7 +82,7 @@ public class UserServiceImpl implements UserService {
 
     @PostConstruct
     public void initSaveAdmin() {
-        User user = User.builder()
+         User user = User.builder()
                 .firstName("Ulan")
                 .lastName("Kubanychbekov")
                 .email("admin@gmail.com")
