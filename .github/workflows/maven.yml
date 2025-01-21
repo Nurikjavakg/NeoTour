@@ -29,11 +29,20 @@ jobs:
         cache: maven
 
     - name: Set up PostgreSQL
-      uses: kartoza/setup-postgres@v2
+      uses: harmon758/postgresql-action@v2.1.0
       with:
           postgres-version: '14'  # Версия PostgreSQL
           postgres-db: 'travelsdb'
           postgres-user: 'postgres'
           postgres-password: '1234'
+
+    - name: Export environment variables
+      run: |
+          echo "DB_HOST=localhost" >> $GITHUB_ENV
+          echo "DB_PORT=5432" >> $GITHUB_ENV
+          echo "DB_NAME=travelsdb" >> $GITHUB_ENV
+          echo "DB_USER=postgres" >> $GITHUB_ENV
+          echo "DB_PASSWORD=1234" >> $GITHUB_ENV
+
     - name: Build with Maven
       run: mvn clean install
