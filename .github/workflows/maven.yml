@@ -27,5 +27,13 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+
+    - name: Set up PostgreSQL
+      uses: kartoza/setup-postgres@v2
+      with:
+          postgres-version: '14'  # Версия PostgreSQL
+          postgres-db: 'travelsdb'
+          postgres-user: 'postgres'
+          postgres-password: '1234'
     - name: Build with Maven
       run: mvn clean install
